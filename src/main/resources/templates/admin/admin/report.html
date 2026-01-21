@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Reports | GreenInd</title>
+</head>
+<body>
+    <h2>Hello, <span th:text="${admin.name}">Admin Name</span>!</h2>
+    <h3>Student Task Reports</h3>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Total Tasks Submitted</th>
+                <th>Pending</th>
+                <th>Approved</th>
+                <th>Rejected</th>
+                <th>Total Points</th>
+                <th>Badge Level</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="student : ${students}">
+                <td th:text="${student.name}">Student Name</td>
+                <td th:text="${student.totalTasks}">0</td>
+                <td th:text="${student.pendingTasks}">0</td>
+                <td th:text="${student.approvedTasks}">0</td>
+                <td th:text="${student.rejectedTasks}">0</td>
+                <td th:text="${student.totalPoints}">0</td>
+                <td th:text="${student.badgeLevel}">N/A</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

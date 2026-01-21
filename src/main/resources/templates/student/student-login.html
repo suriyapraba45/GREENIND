@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Login | GreenInd</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Student Login</h2>
+        <form action="/student/login" method="post">
+            <div>
+                <label for="studentId">Student ID:</label>
+                <input type="text" id="studentId" name="studentId" required>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+
+        <p>Don't have an account? <a href="/student/register">Register here</a></p>
+    </div>
+</body>
+</html>

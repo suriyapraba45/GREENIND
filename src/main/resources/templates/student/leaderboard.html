@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Leaderboard | GreenInd</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Leaderboard</h2>
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Student Name</th>
+                    <th>Eco Points</th>
+                    <th>Badge Level</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Loop through leaderboard -->
+                <tr th:each="student, iterStat : ${leaderboard}">
+                    <td th:text="${iterStat.index + 1}">1</td>
+                    <td th:text="${student.name}">Student Name</td>
+                    <td th:text="${student.totalPoints}">0</td>
+                    <td th:text="${student.badgeLevel}">Bronze</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="/student/student-dashboard">Back to Dashboard</a>
+    </div>
+</body>
+</html>

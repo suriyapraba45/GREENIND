@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Dashboard | GreenInd</title>
+</head>
+<body>
+    <div class="container">
+        <!-- Greeting -->
+        <h2>Welcome Student, <span th:text="${studentName}"></span></h2>
+
+        <!-- Badge & Points -->
+        <div class="badge-section">
+            <h3>Your Badge</h3>
+            <span th:if="${student.totalPoints < 50}">🥉 Bronze</span>
+            <span th:if="${student.totalPoints >= 50 and student.totalPoints < 100}">🥈 Silver</span>
+            <span th:if="${student.totalPoints >= 100 and student.totalPoints < 200}">🥇 Gold</span>
+            <span th:if="${student.totalPoints >= 200}">💎 Platinum</span>
+
+            <p>Total Points: <span th:text="${student.totalPoints}">0</span></p>
+        </div>
+
+        <!-- Navigation -->
+        <div class="dashboard-links">
+            <ul>
+                <li><a href="/student/tasks">View Available Tasks</a></li>
+                <li><a href="/student/task-status">Check Task Status</a></li>
+                <li><a href="/student/submit-proof">Submit Proof</a></li>
+                <li><a href="/student/learning-module">Learning Modules & Quiz</a></li>
+                <li><a href="/student/leaderboard">Leaderboard</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

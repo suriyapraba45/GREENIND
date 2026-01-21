@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Tasks | GreenInd</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Available Tasks</h2>
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Task Name</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Loop through tasks -->
+                <tr th:each="task : ${tasks}">
+                    <td th:text="${task.name}">Task Name</td>
+                    <td th:text="${task.category}">Category</td>
+                    <td th:text="${task.description}">Description</td>
+                    <td th:text="${task.status}">PENDING</td>
+                    <td>
+                        <form th:action="@{/student/submit-task}" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="taskId" th:value="${task.id}">
+                            <input type="file" name="proof" required>
+                            <button type="submit" th:if="${task.status == 'PENDING'}">Submit</button>
+                            <span th:if="${task.status != 'PENDING'}">Submitted</span>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="/student/student-dashboard">Back to Dashboard</a>
+    </div>
+</body>
+</html>

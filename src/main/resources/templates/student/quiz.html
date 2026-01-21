@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz | GreenInd</title>
+</head>
+<body>
+    <div class="container">
+        <h2 th:text="${quiz.title}">Quiz Title</h2>
+        <p th:text="${quiz.description}">Quiz Description</p>
+
+        <form th:action="@{/student/submit-quiz}" method="post">
+            <input type="hidden" name="quizId" th:value="${quiz.id}">
+
+            <!-- Loop through questions -->
+            <div th:each="question, iterStat : ${quiz.questions}">
+                <p><strong th:text="'Q' + (iterStat.index + 1) + ': ' + question.text">Question Text</strong></p>
+
+                <!-- Loop through options -->
+                <div th:each="option : ${question.options}">
+                    <label>
+                        <input type="radio" th:name="'answer_' + question.id" th:value="${option.id}" required>
+                        <span th:text="${option.text}">Option Text</span>
+                    </label>
+                </div>
+                <hr>
+            </div>
+
+            <button type="submit">Submit Quiz</button>
+        </form>
+
+        <a href="/student/learning-modules">Back to Modules</a>
+    </div>
+</body>
+</html>

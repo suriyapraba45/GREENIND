@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Review Tasks | GreenInd</title>
+</head>
+<body>
+    <h2>Hello, <span th:text="${admin.name}">Admin Name</span>!</h2>
+    <h3>Task Submissions to Review</h3>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Task</th>
+                <th>Description</th>
+                <th>Proof</th>
+                <th>Status</th>
+                <th>Remarks</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="submission : ${submissions}">
+                <td th:text="${submission.student.name}">Student Name</td>
+                <td th:text="${submission.task.title}">Task Title</td>
+                <td th:text="${submission.description}">Description</td>
+                <td>
+                    <img th:src="@{${submission.proofImagePath}}" alt="Proof" width="100">
+                </td>
+                <td th:text="${submission.status}">PENDING</td>
+                <td>
+                    <input type="text" th:value="${submission.remarks}" placeholder="Add remarks">
+                </td>
+                <td>
+                    <form th:action="@{'/admin/approve/' + ${submission.id}}" method="post" style="display:inline;">
+                        <button type="submit">Approve</button>
+                    </form>
+                    <form th:action="@{'/admin/reject/' + ${submission.id}}" method="post" style="display:inline;">
+                        <button type="submit">Reject</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

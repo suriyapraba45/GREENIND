@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Learning Modules | GreenInd</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Learning Modules</h2>
+
+        <ul>
+            <!-- Loop through modules -->
+            <li th:each="module : ${modules}">
+                <h3 th:text="${module.name}">Module Name</h3>
+                <p th:text="${module.description}">Module Description</p>
+                <a th:href="@{/student/quizzes/{moduleId}(moduleId=${module.id})}">Take Quiz</a>
+                <a th:href="@{/student/tasks/{moduleId}(moduleId=${module.id})}">View Tasks</a>
+            </li>
+        </ul>
+
+        <a href="/student/student-dashboard">Back to Dashboard</a>
+    </div>
+</body>
+</html>
