@@ -9,29 +9,28 @@ public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;          // database primary key
+    private Long id;   // primary key
 
-    @Column(unique = true)
-    private String studentId; // login ID
+    @Column(unique = true, nullable = false)
+    private String studentId;   // login ID
 
+    @Column(nullable = false)
     private String fullName;
 
+    @Column(nullable = false)
     private String password;
 
     private LocalDate dob;
 
+    // Many students → One admin
     @ManyToOne
     @JoinColumn(name = "admin_id")
     private Admin admin;
 
-    // -------- GETTERS AND SETTERS --------
+    // -------- GETTERS & SETTERS --------
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getStudentId() {
@@ -73,14 +72,4 @@ public class Student {
     public void setAdmin(Admin admin) {
         this.admin = admin;
     }
-
-    //dashboard
-
-     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String username;
-    private String password;
-
 }
