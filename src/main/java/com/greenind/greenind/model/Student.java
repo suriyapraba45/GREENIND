@@ -9,25 +9,24 @@ public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;   // primary key
+    private Long id;
 
-    @Column(unique = true, nullable = false)
-    private String studentId;   // login ID
+    @Column(unique = true)
+    private String studentId;
 
-    @Column(nullable = false)
     private String fullName;
 
-    @Column(nullable = false)
     private String password;
 
     private LocalDate dob;
 
-    // Many students → One admin
+    private int totalPoints = 0;
+
     @ManyToOne
     @JoinColumn(name = "admin_id")
     private Admin admin;
 
-    // -------- GETTERS & SETTERS --------
+    // ===== GETTERS & SETTERS =====
 
     public Long getId() {
         return id;
@@ -52,7 +51,7 @@ public class Student {
     public String getPassword() {
         return password;
     }
-
+    
     public void setPassword(String password) {
         this.password = password;
     }
@@ -63,6 +62,14 @@ public class Student {
 
     public void setDob(LocalDate dob) {
         this.dob = dob;
+    }
+
+    public int getTotalPoints() {
+        return totalPoints;
+    }
+
+    public void setTotalPoints(int totalPoints) {
+        this.totalPoints = totalPoints;
     }
 
     public Admin getAdmin() {

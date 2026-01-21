@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/student")
 public class StudentController {
@@ -14,50 +16,47 @@ public class StudentController {
     @Autowired
     private StudentRepository studentRepository;
 
-    // 1️⃣ Show login page
+    // Show login page
     @GetMapping("/login")
     public String showLoginPage() {
         return "student/student-login";
     }
 
-    // 2️⃣ Handle login submission
+    // Handle login
     @PostMapping("/login")
     public String processLogin(
             @RequestParam String studentId,
             @RequestParam String password,
-            Model model
-    ) {
-        Student student = studentRepository.findByStudentId(studentId);
+            Model model) {
 
-        if (student != null && student.getPassword().equals(password)) {
+        Optional<Student> studentOpt =
+                studentRepository.findByStudentIdAndPassword(studentId, password);
 
-            model.addAttribute("studentName", student.getFullName());
-            model.addAttribute("studentId", student.getStudentId());
-
+        if (studentOpt.isPresent()) {
+            model.addAttribute("student", studentOpt.get());
             return "student/student-dashboard";
-
         } else {
-            model.addAttribute("error", "Invalid Student ID or Password!");
+            model.addAttribute("error", "Invalid Student ID or Password");
             return "student/student-login";
         }
     }
 
-    // 3️⃣ Show registration page
+    // Show register page
     @GetMapping("/register")
     public String showRegisterPage() {
         return "student/student-register";
     }
 
-    // 4️⃣ Handle registration submission
+    // Handle register
     @PostMapping("/register")
     public String processRegister(
             @RequestParam String studentId,
             @RequestParam String fullName,
             @RequestParam String password,
-            Model model
-    ) {
-        if (studentRepository.findByStudentId(studentId) != null) {
-            model.addAttribute("error", "Student ID already exists!");
+            Model model) {
+
+        if (studentRepository.findByStudentId(studentId).isPresent()) {
+            model.addAttribute("error", "Student ID already exists");
             return "student/student-register";
         }
 
@@ -65,10 +64,11 @@ public class StudentController {
         student.setStudentId(studentId);
         student.setFullName(fullName);
         student.setPassword(password);
+        student.setTotalPoints(0);
 
         studentRepository.save(student);
 
-        model.addAttribute("success", "Registered successfully! Please login.");
+        model.addAttribute("success", "Registration successful. Please login.");
         return "student/student-login";
     }
 }

@@ -1,20 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Student Dashboard | GreenInd</title>
 </head>
 <body>
     <div class="container">
-        <!-- Greeting -->
-        <h2>Welcome Student, <span th:text="${studentName}"></span></h2>
+
+        <h2>Welcome, <span th:text="${student.fullName}"></span></h2>
 
         <!-- Badge & Points -->
         <div class="badge-section">
             <h3>Your Badge</h3>
+
             <span th:if="${student.totalPoints < 50}">🥉 Bronze</span>
-            <span th:if="${student.totalPoints >= 50 and student.totalPoints < 100}">🥈 Silver</span>
-            <span th:if="${student.totalPoints >= 100 and student.totalPoints < 200}">🥇 Gold</span>
+            <span th:if="${student.totalPoints >= 50 && student.totalPoints < 100}">🥈 Silver</span>
+            <span th:if="${student.totalPoints >= 100 && student.totalPoints < 200}">🥇 Gold</span>
             <span th:if="${student.totalPoints >= 200}">💎 Platinum</span>
 
             <p>Total Points: <span th:text="${student.totalPoints}">0</span></p>
